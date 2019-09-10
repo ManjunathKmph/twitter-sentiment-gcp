@@ -1,4 +1,4 @@
-#Twitter Streaming Project
+#Twitter Streaming Using Google Cloud Natural Language API
 
 #Prerequisite
 1. Download and Install Node.js.
