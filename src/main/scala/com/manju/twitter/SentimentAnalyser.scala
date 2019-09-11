@@ -22,22 +22,22 @@ class SentimentAnalyser extends Serializable {
    */
   def detectSentiment(message:String): String = {
     //if the message is blank then return the sentiment value as not understood.
-       if(message == null || message == "" || message.length() == 0) {
-          NOT_UNDERSTOOD.toString()
-       }
-	try {
-	val doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
-	
-	val sentiment = language.analyzeSentiment(doc).getDocumentSentiment();
-	
-	if(sentiment.getScore() > 0) {
-		POSITIVE.toString()
-	} else if(sentiment.getScore() < 0) {
-		NEGATIVE.toString()
-	} else {
-		NEUTRAL.toString()
-	}
-       } catch {case _: Throwable => NOT_UNDERSTOOD.toString()}
+    if(message == null || message == "" || message.length() == 0) {
+      NOT_UNDERSTOOD.toString()
+    }
+  	try {
+    	val doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
+    	
+    	val sentiment = language.analyzeSentiment(doc).getDocumentSentiment();
+    	
+    	if(sentiment.getScore() > 0) {
+    		POSITIVE.toString()
+    	} else if(sentiment.getScore() < 0) {
+    		NEGATIVE.toString()
+    	} else {
+    		NEUTRAL.toString()
+    	}
+    } catch {case _: Throwable => NOT_UNDERSTOOD.toString()}
   }
   
   /*
