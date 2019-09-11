@@ -49,8 +49,11 @@ socket.on('sentimentData', function(data){
 })
 
 function getJsonObj(message) {
+	if(message == "" || message == undefined)
+	    return undefined
 	//Bypassing new line, tab etc., characters from json parser, otherwise json parser will throw error.
 	message = message.replace(/[\b]/g, '\\b').replace(/[\f]/g, '\\f').replace(/[\n]/g, '\\n').replace(/[\r]/g, '\\r').replace(/[\t]/g, '\\t');
+	//console.log("message" + message);
 	var json = JSON.parse(message);
 	return json;
 }

@@ -9,12 +9,12 @@ import com.google.cloud.language.v1.Sentiment
  * @author Manjunath Kempaiah
  * @version 1.0
  * 
- * Class does the sentiment analysis on the tweets using stanford nlp library.
+ * Class does the sentiment analysis on the tweets using google cloud nlp library.
  *
  */
-class SentimentAnalyser {
+class SentimentAnalyser extends Serializable {
 
-   val language = LanguageServiceClient.create();
+   @transient lazy val language = LanguageServiceClient.create();
   
   /*
    * Method uses google cloud natural language api to detect the sentiment of the message.
@@ -22,10 +22,10 @@ class SentimentAnalyser {
    */
   def detectSentiment(message:String): String = {
     //if the message is blank then return the sentiment value as not understood.
-    if(message == null || message == "" || message.length() == 0) {
-        NOT_UNDERSTOOD.toString()
-    }
-	
+       if(message == null || message == "" || message.length() == 0) {
+          NOT_UNDERSTOOD.toString()
+       }
+	try {
 	val doc = Document.newBuilder().setContent(message).setType(Type.PLAIN_TEXT).build();
 	
 	val sentiment = language.analyzeSentiment(doc).getDocumentSentiment();
@@ -37,6 +37,7 @@ class SentimentAnalyser {
 	} else {
 		NEUTRAL.toString()
 	}
+       } catch{}
   }
   
   /*
