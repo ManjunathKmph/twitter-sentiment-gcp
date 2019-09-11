@@ -37,7 +37,7 @@ class SentimentAnalyser extends Serializable {
 	} else {
 		NEUTRAL.toString()
 	}
-       } catch{}
+       } catch {case _: Throwable => NOT_UNDERSTOOD.toString()}
   }
   
   /*

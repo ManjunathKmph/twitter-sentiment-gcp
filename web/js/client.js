@@ -4,6 +4,8 @@ var dataArr = [0, 0, 0];
 //code will use high charts to draw the line graph using hash tag and their counts.
 socket.on('twitterData', function(data){
 	var json = getJsonObj(data);
+        if(json == undefined)
+		return
 	var tags=[];
 	var counts=[];
 	//Segregating the hash tags and counts into separate array's.
@@ -18,6 +20,8 @@ socket.on('twitterData', function(data){
 socket.on('sentimentData', function(data){
 	if(hashtag.length > 0) {
 		var json = getJsonObj(data);
+		if(json == undefined)
+			return
 		var cssClass = "alert alert-warning";
 		switch(json.sentiment) {
 			case "NEGATIVE": 
